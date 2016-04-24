@@ -1,19 +1,4 @@
-# learn angular
+# angular核心服务、指令等测试demo
 
-### 项目相关angular模块
+`ng-router`,`ui-router`,`ng-animate`及常用第三方`ng`模块测试demo，每个对应自己的分支。
 
-* angular
-* angular-animate
-* angular-aria
-* angular-bootstrap
-* angular-cookies
-* angular-i18n
-* angular-route
-* angular-sanitize
-* angular-messages
-* angular-resource
-* bootstrap
-* jquery
-* ng-file-upload
-* qrcode
-* underscore
