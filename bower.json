@@ -18,15 +18,7 @@
   ],
   "devDependencies": {
     "angular": "~1.4.8",
-    "underscore": "~1.8.3",
-    "angular-i18n": "~1.4.8",
-    "angular-sanitize": "~1.4.8",
-    "qrcode.js": "https://github.com/davidshimjs/qrcodejs.git",
-    "angular-animate": "~1.4.8",
-    "angular-aria": "~1.4.8",
-    "angular-cookies": "~1.4.8",
-    "angular-messages": "~1.4.8",
-    "angular-resource": "~1.4.8",
-    "angular-mocks": "~1.4.8"
+    "angular-mocks": "~1.4.8",
+    "angular-ui-router": "^0.2.18"
   }
 }
