@@ -3,23 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Angular 指令的4种不同格式</title>
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
-    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
     <script src="../bower_components/angular/angular.js"></script>
 </head>
-<body>
+<body ng-controller="DemoController as demo">
 
-<div ng-controller="DemoController as demo">
+<p ng-bind="demo.model.data"></p>
 
-    <p ng-bind="demo.model.data"></p>
-    <p ng:bind="demo.model.data"></p>
-    <p data-ng-bind="demo.model.data"></p>
-    <p x-ng-bind="demo.model.data"></p>
+<p ng:bind="demo.model.data"></p>
 
-    <p ng_bind="demo.model.data"></p>
+<p data-ng-bind="demo.model.data"></p>
 
-</div>
+<p x-ng-bind="demo.model.data"></p>
 
+<p ng_bind="demo.model.data"></p>
 
 <script>
 

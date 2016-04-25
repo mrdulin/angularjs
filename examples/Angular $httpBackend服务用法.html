@@ -46,25 +46,15 @@
 
         function run($httpBackend, $log) {
             var books = [
-                {
-                    id: 1,
-                    name: 'angular权威指南'
-                },
-                {
-                    id: 2,
-                    name: 'jQuery权威指南'
-                },
-                {
-                    id: 3,
-                    name: 'JavaScript权威指南'
-                }
+                {id: 1,name: 'angular权威指南'},
+                {id: 2,name: 'jQuery权威指南'},
+                {id: 3,name: 'JavaScript权威指南'}
             ];
+
             //获取图书
             $httpBackend.when('GET', '/api/book/get').respond(function (method, url, data, headers, params) {
                 $log.info(method, url, data, headers, params);
-                return [200, {
-                    data: books
-                }];
+                return [200, {data: books}];
             });
 
             //添加图书

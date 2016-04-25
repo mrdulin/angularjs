@@ -7,6 +7,9 @@
 </head>
 <body ng-controller="DemoController as vm">
 
+<p ng-bind="vm.bookSerialized"></p>
+
+<p ng-bind="vm.bookSerializedJQLike"></p>
 <script>
     (function() {
         angular.module('demo', []);
@@ -15,20 +18,16 @@
                 .module('demo')
                 .controller('DemoController', DemoController);
 
-        DemoController.$inject = ['$log', '$httpParamSerializer', '$httpParamSerializerJQLike'];
+        DemoController.$inject = ['$httpParamSerializer', '$httpParamSerializerJQLike'];
 
-        function DemoController($log, $httpParamSerializer, $httpParamSerializerJQLike) {
-
+        function DemoController($httpParamSerializer, $httpParamSerializerJQLike) {
             var vm = this;
-
             vm.book = {
                 name: 'angular',
                 id: 1
             };
-
-            $log.info($httpParamSerializer(vm.book));
-            $log.info($httpParamSerializerJQLike(vm.book));
-
+            vm.bookSerialized = $httpParamSerializer(vm.book);
+            vm.bookSerializedJQLike = $httpParamSerializerJQLike(vm.book);
         }
     })();
 </script>
