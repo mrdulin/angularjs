@@ -1,3 +1,4 @@
-# learn_angular-requirejs
+# Angular and RequireJS
 
-每个example为一种angularjs + requirejs的架构
+1.  `bower i`安装前端依赖库
+2.  每个example为一种组织结构    

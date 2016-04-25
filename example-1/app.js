@@ -30,11 +30,11 @@ define([
             .when('/', {
                 templateUrl: './home/home.tpl.html',
                 resolve: {
-                    deps: ['$q', '$rootScope', function($q, $rootScope) {
+                    deps: ['$q', '$rootScope', function ($q, $rootScope) {
                         var deferred = $q.defer();
 
-                        require(['homeController', 'homeService'], function() {
-                            $rootScope.$apply(function() {
+                        require(['homeController', 'homeService'], function () {
+                            $rootScope.$apply(function () {
                                 deferred.resolve();
                             });
                         });
@@ -47,14 +47,14 @@ define([
             .when('/contact', {
                 templateUrl: './contact/contact.tpl.html',
                 resolve: {
-                    deps: ['$q', '$rootScope', function($q, $rootScope) {
+                    deps: ['$q', '$rootScope', function ($q, $rootScope) {
                         var deferred = $q.defer();
 
                         require([
                             'contactController',
                             'directives/nova.alert'
-                        ], function() {
-                            $rootScope.$apply(function() {
+                        ], function () {
+                            $rootScope.$apply(function () {
                                 deferred.resolve();
                             });
                         });
@@ -67,11 +67,11 @@ define([
             .when('/about', {
                 templateUrl: './about/about.tpl.html',
                 resolve: {
-                    deps: ['$q', '$rootScope', function($q, $rootScope) {
+                    deps: ['$q', '$rootScope', function ($q, $rootScope) {
                         var deferred = $q.defer();
 
-                        require(['aboutController'], function() {
-                            $rootScope.$apply(function() {
+                        require(['aboutController'], function () {
+                            $rootScope.$apply(function () {
                                 deferred.resolve();
                             });
                         });
