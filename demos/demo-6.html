@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../bower_components/angular/angular.js"></script>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+
+<script>
+    angular.module('demo', []);
+
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController() {
+        var vm = this;
+    }
+</script>
+</body>
+</html>
