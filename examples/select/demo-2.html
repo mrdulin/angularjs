@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../bower_components/angular/angular.js"></script>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+
+<div>
+    <label>
+        <select ng-options="vm.cityCode[key] as value + '市' for (key, value) in vm.data" ng-model="vm.dataSelected"></select>
+    </label>
+    <p ng-bind="vm.dataSelected"></p>
+</div>
+
+<div>
+    <label>
+        <select ng-options="(value | city_code) as (value | cn_name) for (key, value) in vm.city" ng-model="vm.citySelected"></select>
+    </label>
+    <p ng-bind="vm.citySelected"></p>
+</div>
+
+<div>
+    <label>
+        <select ng-options="(value | city_code) as (value | cn_name) group by (value | city_group) for (key, value) in vm.city" ng-model="vm.citySelected"></select>
+    </label>
+    <p ng-bind="vm.citySelected"></p>
+</div>
+
+<div>
+    <label>
+        <select ng-options="(cityString | city_code) as (cityString | cn_name) group by (cityString | city_group) for cityString in (vm.cityPlain | enumerable)" ng-model="vm.citySelected"></select>
+    </label>
+    <p ng-bind="vm.citySelected"></p>
+</div>
+
+<script>
+    angular.module('demo', []);
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController($filter) {
+        var vm = this;
+        vm.data = {
+            'beijing': '北京',
+            'shanghai': '上海',
+            'chengdu': '成都',
+            'shenzhen': '深圳'
+        };
+        vm.cityCode = {
+            beijing: 'PEK',
+            shanghai: 'SHA',
+            chengdu: 'CTU',
+            shenzhen: 'SZX'
+        };
+        vm.dataSelected = vm.cityCode[Object.keys(vm.cityCode)[0]];
+
+        //改进
+        vm.city = {
+            beijing: '北京:PEK:1',
+            shanghai: '上海:SHA:1',
+            chengdu: '成都:CTU:2',
+            shenzhen: '深圳:SZX:1'
+        };
+        vm.citySelected = $filter('city_code')(vm.city[Object.keys(vm.city)[0]]);
+
+
+        //究极改进
+        vm.cityPlain = '北京:PEK:1;上海:SHA:1;成都:CTU:2;深圳:SZX:1';
+        //TODO 转换数据为select指令支持的可枚举类型数据即可，这里使用filter转换
+    }
+
+    angular
+            .module('demo')
+            .filter('cn_name', function() {
+                return function(raw) {
+                    return raw.split(':')[0] + '市';
+                }
+            })
+            .filter('city_code', function() {
+                return function(raw) {
+                    return raw.split(':')[1];
+                }
+            })
+            .filter('city_group', function() {
+                return function(raw) {
+                    var cnNameTable = ['FUCK ME', '一', '二', '三', '四'];
+                    return cnNameTable[raw.split(':')[2]] + '线';
+                }
+            })
+            .filter('enumerable', function() {
+                return function(raw) {
+                    return raw.split(';');
+                }
+            })
+</script>
+</body>
+</html>

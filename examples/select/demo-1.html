@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../../bower_components/angular/angular.js"></script>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+
+<label>
+    <select ng-options="value + '市' for (key, value) in vm.data" ng-model="vm.dataSelected"></select>
+</label>
+
+<p ng-bind="vm.dataSelected"></p>
+
+<script>
+    angular.module('demo', []);
+
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController() {
+        var vm = this;
+
+        vm.data = {
+            'beijing': '北京',
+            'shanghai': '上海',
+            'chengdu': '成都',
+            'shenzhen': '深圳'
+        };
+
+        //初始化数据是'北京'，不是'北京市'
+        vm.dataSelected = '北京';
+    }
+</script>
+</body>
+</html>

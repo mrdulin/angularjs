@@ -110,6 +110,18 @@
         </div>
 
 
+        <div>
+            <label for="bookSelect6">包含空值选项</label>
+            <select name="bookSelect6"
+
+                    ng-options="option.text for option in options track by option.value"
+                    id="bookSelect6">
+                <option value="">-- 请选择教程 --</option>
+            </select>
+
+        </div>
+
+
 
         <p ng-show="myForm.bookSelect.$valid" ng-style="DemoCtrl.fn.dynamicStyle(myForm.bookSelect)">选择合法</p>
         <p ng-show="myForm.bookSelect.$error.required" ng-style="DemoCtrl.fn.dynamicStyle(myForm.bookSelect)">还没有选择啊~</p>

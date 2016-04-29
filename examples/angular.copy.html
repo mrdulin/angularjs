@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../bower_components/angular/angular.js"></script>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+
+<p>e.g.</p>
+<p ng-bind="vm.resultObj1 | json"></p>
+<p ng-bind="vm.resultArr1 | json"></p>
+
+<p>e.g.</p>
+<p ng-bind="vm.destObj | json"></p>
+<p ng-bind="vm.destArr | json"></p>
+
+<script>
+    angular.module('demo', []);
+
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController($log) {
+        var vm = this;
+        var sourceObj = {name: 'dulin', age: 24};
+        var sourceArr = [1, 2, 3, 4, 5];
+
+        //e.g.
+        vm.resultObj1 = angular.copy(sourceObj);
+        vm.resultArr1 = angular.copy(sourceArr);
+
+        //e.g.
+        vm.destObj = {job: 'web developer'};
+        var w = angular.copy(sourceObj, vm.destObj);
+        $log.info(w, w === vm.destObj); //{name: "dulin", age: 24} true
+
+        var destArr = ['a', 'b', 'c'];
+        vm.destArr = angular.copy(sourceArr, destArr);
+
+        //e.g.
+        $log.info(angular.copy(null), angular.copy(undefined)); //null undefined
+
+
+        //e.g.
+        //Error: [ng:cpi] Can't copy! Source and destination are identical.
+        angular.copy(sourceObj, sourceObj);
+    }
+</script>
+</body>
+</html>
