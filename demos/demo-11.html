@@ -7,6 +7,23 @@
 </head>
 <body ng-app="demo" ng-controller="DemoController as vm">
 
+<div>
+    <label>
+        <select ng-options="city.cn
+                            group by (['hehe', '一', '二', '三', '四'][city.group] + '线')
+                            disable when city.group === '2'
+                            for city
+                            in vm.citys
+                            | orderBy: '+qp[0]'
+                            track by city.id"
+                ng-model="vm.citySelected">
+            <option value="">--- 请选择城市 ---</option>
+        </select>
+    </label>
+
+    <p ng-bind="vm.citySelected | json"></p>
+</div>
+
 <script>
     angular.module('demo', []);
 
@@ -16,6 +33,15 @@
 
     function DemoController() {
         var vm = this;
+
+        vm.citys = [
+            {id: '1', cn: '北京', qp: 'beijing', group: '1'},
+            {id: '2', cn: '上海', qp: 'shanghai', group: '1'},
+            {id: '3', cn: '成都', qp: 'chengdu', group: '2'},
+            {id: '4', cn: '深圳', qp: 'shenzhen', group: '1'},
+            {id: '5', cn: '广州', qp: 'guangzhou', group: '1'}
+        ];
+
     }
 </script>
 </body>

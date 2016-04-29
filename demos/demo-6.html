@@ -2,10 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>label for value in array</title>
     <script src="../bower_components/angular/angular.js"></script>
 </head>
 <body ng-app="demo" ng-controller="DemoController as vm">
+
+<div>
+    <label>
+        <select ng-options="city.cn for city in vm.citys" ng-model="vm.citySelected">
+            <option value="">--- 请选择城市 ---</option>
+        </select>
+    </label>
+    <p ng-bind="vm.citySelected | json"></p>
+</div>
 
 <script>
     angular.module('demo', []);
@@ -16,6 +25,19 @@
 
     function DemoController() {
         var vm = this;
+
+        vm.citys = [
+            {cn: '北京', qp: 'beijing'},
+            {cn: '上海', qp: 'shanghai'},
+            {cn: '成都', qp: 'chengdu'},
+            {cn: '深圳', qp: 'shenzhen'}
+        ];
+
+        //无默认选中城市
+        vm.citySelected = null;
+
+        //有默认选中城市
+        //vm.citySelected = vm.citys[0];
     }
 </script>
 </body>
