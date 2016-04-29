@@ -2,17 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
-    <script src="../../bower_components/angular/angular.js"></script>
+    <title>select as label group by group for (key, value) in object</title>
+    <script src="../bower_components/angular/angular.js"></script>
 </head>
 <body ng-app="demo" ng-controller="DemoController as vm">
-
-<div>
-    <label>
-        <select ng-options="vm.cityCode[key] as value + '市' for (key, value) in vm.data" ng-model="vm.dataSelected"></select>
-    </label>
-    <p ng-bind="vm.dataSelected"></p>
-</div>
 
 <div>
     <label>
@@ -37,27 +30,15 @@
 
 <script>
     angular.module('demo', []);
+
     angular
             .module('demo')
             .controller('DemoController', DemoController);
 
     function DemoController($filter) {
         var vm = this;
-        vm.data = {
-            'beijing': '北京',
-            'shanghai': '上海',
-            'chengdu': '成都',
-            'shenzhen': '深圳'
-        };
-        vm.cityCode = {
-            beijing: 'PEK',
-            shanghai: 'SHA',
-            chengdu: 'CTU',
-            shenzhen: 'SZX'
-        };
-        vm.dataSelected = vm.cityCode[Object.keys(vm.cityCode)[0]];
 
-        //改进
+        //改进demo-2
         vm.city = {
             beijing: '北京:PEK:1',
             shanghai: '上海:SHA:1',
@@ -70,6 +51,7 @@
         //究极改进
         vm.cityPlain = '北京:PEK:1;上海:SHA:1;成都:CTU:2;深圳:SZX:1';
         //TODO 转换数据为select指令支持的可枚举类型数据即可，这里使用filter转换
+
     }
 
     angular
@@ -94,7 +76,7 @@
                 return function(raw) {
                     return raw.split(';');
                 }
-            })
+            });
 </script>
 </body>
 </html>
