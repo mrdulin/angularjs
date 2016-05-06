@@ -1,6 +1,6 @@
 {
-  "name": "angular-async-load",
-  "homepage": "https://github.com/Sspeed5cm/angular-async-load",
+  "name": "angular-requirejs",
+  "homepage": "https://github.com/mrdulin/angular-requirejs",
   "authors": [
     "dulin <novaline@qq.com>"
   ],
