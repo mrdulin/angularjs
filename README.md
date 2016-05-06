@@ -1,3 +1,2 @@
-# learn_angular-bootstrap
+# angular-ui-bootstrap-demos
 
-`angular-bootstrap`的测试demos
