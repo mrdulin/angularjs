@@ -1,11 +1,8 @@
 {
-  "name": "learn-angular",
+  "name": "angular-select-directive-demos",
   "version": "1.0.0",
   "description": "ngOptions指令用来在`select`元素中动态生成`option`元素。",
-  "main": "index.js",
-  "directories": {
-    "test": "tests"
-  },
+  "main": "",
   "dependencies": {},
   "devDependencies": {},
   "scripts": {
@@ -13,12 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://novaline@qq.com:ez2dj_dl@github.com/mrdulin/learn-angular.git"
+    "url": "https://github.com/mrdulin/angular-select-directive-demos.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mrdulin/learn-angular/issues"
+    "url": "https://github.com/mrdulin/angular-select-directive-demos/issues"
   },
-  "homepage": "https://github.com/mrdulin/learn-angular#readme"
+  "homepage": "https://github.com/mrdulin/angular-select-directive-demos#readme"
 }
