@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <style>
+        a {
+            display: block;
+            width: 100px;
+            height: 100px;
+        }
+
+        #demo-2 {
+            background: url(../imgs/1.jpg) no-repeat;
+            background-size: 100%;
+        }
+
+        a > img {
+            height: 100%;
+        }
+    </style>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+
+<ul>
+    <li>
+        <!-- 同时指定ng-src和src，但这种方式只在ng-src的值解析出来是""的情况，src才会起作用 -->
+        <!-- 如果ng-src解析出来的值不是空字符串，那么ng-src指令会设置src的值为解析出来的地址，但如果该地址是404，那么视图上将显示404的小图标-->
+        <a id="demo-1"><img ng-src="{{vm.data1.url}}" src="../imgs/1.jpg"></a>
+        {{vm.data1.text}}
+    </li>
+
+    <li>
+        <a id="demo-2"><img ng-src="{{vm.data2.url}}"></a>
+        {{vm.data2.text}}
+    </li>
+</ul>
+<script>
+    angular.module('demo', []);
+
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController($timeout) {
+        var vm = this;
+        angular.extend(vm, {
+            data1: null,
+            data2: null
+        });
+
+        $timeout(function () {
+            vm.data1 = {url: '../imgs/store6.png', text: 'demo-1'};
+            vm.data2 = {url: '../imgs/store6.png', text: 'demo-2'};
+        }, 1000);
+    }
+</script>
+</body>
+</html>
