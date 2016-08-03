@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <style>
+    #audio-player{
+        position: relative;
+    }
+    #audio-loading{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        background-color: rgba(0,0,0,0.5);
+    }
+    </style>
+</head>
+<body ng-controller="DemoController as vm">
+
+<audio-player src='{{vm.src}}'>
+    <ul>
+        <li ng-bind='vm.name'></li>
+    </ul>
+</audio-player>
+
+<script>
+    angular.module('demo', []);
+
+    angular
+        .module('demo')
+        .config(function($sceDelegateProvider) {
+            $sceDelegateProvider.resourceUrlWhitelist([
+                'self',
+                'http://7xp9vw.com1.z0.glb.clouddn.com/**'
+            ]);
+        })
+        .controller('DemoController', DemoController)
+        .directive('audioPlayer', AudioPlayer)
+
+    function AudioPlayer($log, $timeout) {
+        return {
+            restrict: 'EA',
+            scope: {
+                src: '@'
+            },
+            transclude: true,
+            templateUrl: 'audioPlayer.tmp.html',
+            link: function(scope, element, attrs) {
+                var audio = element.find('audio');
+                var orgAudio = audio[0];
+
+                scope.defaultOptions = {
+                    fastForwardStep: 10,
+                    volumeStep: 0.05,
+                    minVolume: 0,
+                    maxVolume: 1,
+                };
+
+                scope.state = {
+                    progress: 0.1,
+                    volume: 0.5,
+                    maxProgress: 100,
+                    initDone: false
+                };
+
+                audio.bind('timeupdate', ontimeupdate);
+                audio.bind('loadedmetadata', loadedmetadata);
+
+                function loadedmetadata(e) {
+                    var au = e.target;
+                    scope.state.maxProgress = au.duration;
+                    scope.state.initDone = true;
+                    scope.$digest();
+                }
+
+                function ontimeupdate(e) {
+                    var au = e.target;
+                    scope.state.progress = au.currentTime;
+                    document.getElementsByTagName('progress')[0].value = au.currentTime;
+                }
+
+                $timeout(init);
+                function init() {
+                    document.getElementById('volume').value = scope.state.volume;
+                    scope.state.volumePercent = formatPercent(scope.state.volume);
+                }
+
+                function formatPercent(num) {
+                    return new Number(num * 100).toFixed(2) + '%';
+                }
+
+                scope.handleProgress = function(e) {
+                    var prg = e.target;
+                    var percent = e.clientX / prg.clientWidth;
+                    orgAudio.currentTime = percent * scope.state.maxProgress;
+                };
+
+                scope.play = function() {
+                    if(orgAudio.ended || orgAudio.paused) {
+                        orgAudio.play();
+                    }
+                };
+
+                scope.pause = function() {
+                    orgAudio.pause();
+                };
+
+                scope.stop = function() {
+                    orgAudio.pause();
+                    orgAudio.currentTime = 0;
+                };
+
+                scope.fastForward = function() {
+                    orgAudio.currentTime += scope.defaultOptions.fastForwardStep;
+                };
+
+                scope.rewind = function() {
+                    orgAudio.currentTime -= scope.defaultOptions.fastForwardStep;
+                };
+
+                scope.handleVolume = function() {
+                    orgAudio.volume = scope.state.volume;
+                    scope.state.volumePercent = formatPercent(scope.state.volume);
+                };
+            }
+        }
+    }
+
+    function DemoController($sce) {
+        var vm = this;
+        vm.src = 'http://7xp9vw.com1.z0.glb.clouddn.com/Gson%20&%20Abley,Amasi%20-%20Heaven%20%28Radio%20Edit%29.mp3';
+        vm.name = 'Gson & Abley,Amasi - Heaven (Radio Edit).mp3';
+    }
+</script>
+<script type='text/ng-template' id='audioPlayer.tmp.html'>
+    <div id='audio-player'>
+        <div id='song-container' ng-transclude></div>
+        <audio ng-src="{{src}}" preload='metadata' controls>
+            <p>Your browser does not support the <code>audio</code> element </p>
+        </audio>
+        <div>
+            <progress ng-click='handleProgress($event)' value={{state.progress}} max={{state.maxProgress}}></progress>
+        </div>
+        <div>
+            <button type='button' ng-click='play()'>play</button>
+            <button type='button' ng-click='pause()'>pause</button>
+            <button type='button' ng-click='stop()'>stop</button>
+            <button type='button' ng-click='fastForward()'>fastForward</button>
+            <button type='button' ng-click='rewind()'>rewind</button>
+        </div>
+        <div>
+            <label>
+                <input id='volume' type="range" name='volume' min={{defaultOptions.minVolume}} max={{defaultOptions.maxVolume}} step={{defaultOptions.volumeStep}} ng-model='state.volume' ng-change='handleVolume()'>
+            </label>
+            volume: <span ng-bind="state.volumePercent"></span>
+        </div>
+        <div id='audio-loading' ng-if='!state.initDone'></div>
+    </div>
+</script>
+</body>
+</html>
