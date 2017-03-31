@@ -1,4 +1,1 @@
-# angular核心服务、指令 demos
-
-
-
+# ng1.x training
