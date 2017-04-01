@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>label disable when disable for (key, value) in object</title>
+    <script src="../bower_components/angular/angular.js"></script>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+
+<label>
+    <select ng-options="value disable when (key === 'shanghai') for (key, value) in vm.data" ng-model="vm.dataSelected"></select>
+</label>
+
+<p ng-bind="vm.dataSelected"></p>
+
+<script>
+    angular.module('demo', []);
+
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController() {
+        var vm = this;
+
+        vm.data = {
+            'beijing': '北京',
+            'shanghai': '上海',
+            'chengdu': '成都',
+            'shenzhen': '深圳'
+        };
+
+        //初始化的数据不能是disable when的条件，否则初始时，select因为默认值被disable了，无法选中，也就没有选中值
+        //key === 'beijing'测试
+        vm.dataSelected = vm.data[Object.keys(vm.data)[0]];
+    }
+</script>
+</body>
+</html>

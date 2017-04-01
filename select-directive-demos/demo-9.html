@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>label disable when disable for value in array</title>
+    <script src="../bower_components/angular/angular.js"></script>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+
+<div>
+    <label>
+        <select ng-options="city.cn disable when city.group === '2' for city in vm.citys" ng-model="vm.citySelected">
+            <option value="">--- 请选择城市 ---</option>
+        </select>
+    </label>
+    <p ng-bind="vm.citySelected | json"></p>
+</div>
+
+<script>
+    angular.module('demo', []);
+
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController() {
+        var vm = this;
+
+        vm.citys = [
+            {cn: '北京', qp: 'beijing', group: '1'},
+            {cn: '上海', qp: 'shanghai', group: '1'},
+            {cn: '成都', qp: 'chengdu', group: '2'},
+            {cn: '深圳', qp: 'shenzhen', group: '1'}
+        ];
+    }
+</script>
+</body>
+</html>

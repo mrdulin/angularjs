@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>select as label for value in array</title>
+    <script src="../bower_components/angular/angular.js"></script>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+
+<div>
+    <label>
+        <select ng-options="city.qp as city.cn + '市' for city in vm.citys" ng-model="vm.cityQp">
+            <option value="">--- 请选择城市 ---</option>
+        </select>
+    </label>
+    <p ng-bind="vm.cityQp"></p>
+</div>
+
+
+<div>
+    <label>
+        <select ng-options="city as city.cn + '市' for city in vm.citys" ng-model="vm.citySelected">
+            <option value="">--- 请选择城市 ---</option>
+        </select>
+    </label>
+    <p ng-bind="vm.citySelected | json"></p>
+</div>
+
+<script>
+    angular.module('demo', []);
+
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController() {
+        var vm = this;
+
+        vm.citys = [
+            {cn: '北京', qp: 'beijing'},
+            {cn: '上海', qp: 'shanghai'},
+            {cn: '成都', qp: 'chengdu'},
+            {cn: '深圳', qp: 'shenzhen'}
+        ];
+
+    }
+</script>
+</body>
+</html>

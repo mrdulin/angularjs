@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>label group by group for value in array track by trackexpr</title>
+    <script src="../bower_components/angular/angular.js"></script>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+
+<!-- 使用track by标识每一个元素，这样，当你再次获取数据集合时，虽然视图上的数据被新的数据更新了，但根据标识的条件，angular不会再次渲染新数据和旧数据标识相同的DOM节点 -->
+
+<div>
+    <label>
+        <select ng-options="city.cn disable when city.group === '2' for city in vm.citys track by city.id" ng-model="vm.citySelected">
+            <option value="">--- 请选择城市 ---</option>
+        </select>
+    </label>
+
+    <button type="button" ng-click="vm.getCitys()">获取城市</button>
+
+    <p ng-bind="vm.citySelected | json"></p>
+</div>
+
+<script>
+    angular.module('demo', []);
+
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController($timeout, $log) {
+        var vm = this;
+
+        vm.citys = [
+            {id: '1', cn: '北京', qp: 'beijing', group: '1'},
+            {id: '2', cn: '上海', qp: 'shanghai', group: '1'},
+            {id: '3', cn: '成都', qp: 'chengdu', group: '2'},
+            {id: '4', cn: '深圳', qp: 'shenzhen', group: '1'}
+        ];
+
+        /**
+         * 再次获取数据，由于track by的标识(这里是id)和旧数据一样，所以angular不会重新渲染DOM节点，数据量大时，有助于提升性能
+         */
+        vm.getCitys = function() {
+            $timeout(function() {
+                $log.info('update city model');
+                vm.citys = [
+                    {id: '1', cn: '北京', qp: 'beijing', group: '1'},
+                    {id: '2', cn: '上海', qp: 'shanghai', group: '1'},
+                    {id: '3', cn: '成都', qp: 'chengdu', group: '2'},
+                    {id: '4', cn: '深圳', qp: 'shenzhen', group: '1'}
+                ];
+            }, 3000);
+        };
+
+    }
+</script>
+</body>
+</html>

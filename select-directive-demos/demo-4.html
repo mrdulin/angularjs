@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>label group by group for (key, value) in object</title>
+    <script src="../bower_components/angular/angular.js"></script>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+
+<label>
+    <select ng-options="(value | cn_name : '市') group by (value | city_group) for (key, value) in vm.data" ng-model="vm.dataSelected"></select>
+</label>
+
+<p ng-bind="vm.dataSelected | cn_name"></p>
+
+<script>
+    angular.module('demo', []);
+
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController() {
+        var vm = this;
+
+        vm.data = {
+            'beijing': '北京:1',
+            'shanghai': '上海:1',
+            'chengdu': '成都:2',
+            'shenzhen': '深圳:1'
+        };
+
+        vm.dataSelected = vm.data[Object.keys(vm.data)[0]];
+    }
+
+    angular
+            .module('demo')
+            .filter('cn_name', function() {
+                return function(raw, suffix) {
+                    return raw.split(':')[0] + (suffix || '');
+                }
+            })
+            .filter('city_group', function() {
+                return function(raw) {
+                    var cnNameTable = ['FUCK ME', '一', '二', '三', '四'];
+                    return cnNameTable[raw.split(':')[1]] + '线';
+                }
+            });
+
+</script>
+</body>
+</html>
