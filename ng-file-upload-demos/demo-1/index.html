@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>demo-1</title>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+</head>
+<body ng-controller="DemoController as demo">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- 上传表单 -->
+            <form name="uploadForm">
+                <div class="form-group">
+                    <label for="upload" class="control-label sr-only">文件上传:</label>
+
+                    <input id="upload"
+                           name="file"
+                           class="form-control"
+                           ngf-select
+                           ng-model="demo.file"
+                           accept="image/*"
+                           ngf-max-height="1000"
+                           ngf-min-height="100"
+                           ngf-nin-size="'10KB'"
+                           ngf-max-size="'2MB'"
+                           ngf-pattern="'image/*'"
+                           type="file"/>
+                </div>
+
+                <div>
+                    <p class="text-warning" ng-show="uploadForm.file.$error.maxSize">文件容量过大！</p>
+
+                    <p class="text-warning" ng-show="uploadForm.file.$error.minSize">文件容量过小！</p>
+
+                    <p class="text-warning" ng-show="uploadForm.file.$error.maxHeight">图片高度过大！</p>
+
+                    <p class="text-warning" ng-show="uploadForm.file.$error.minHeight">图片高度过小！</p>
+                </div>
+
+                <!-- 确认上传 -->
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" ng-click="demo.submit(uploadForm)">确认上传</button>
+                    <button class="btn btn-default" ng-click="demo.reset()">重置</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 进度条 -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="progress" ng-if="demo.progressPercentage">
+                <div class="progress-bar"
+                     role="progressbar"
+                     aria-valuenow="{{demo.progressPercentage}}"
+                     aria-valuemin="0"
+                     aria-valuemax="100"
+                     ng-style="{width: '{{demo.progressPercentage}}%'}">
+                    {{ demo.progressPercentage + "%" }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <p class="col-md-6">图片预览:</p>
+    </div>
+    <div class="row" ng-if="demo.urlMap">
+        <div class="col-md-3" ng-repeat="(fileName, url) in demo.urlMap">
+            <a href="#" class="thumbnail">
+                <img ngf-src="url" alt="{{fileName}}">
+            </a>
+        </div>
+    </div>
+</div>
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/ng-file-upload/ng-file-upload-all.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
+
+
