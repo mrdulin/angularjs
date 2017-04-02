@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo-1</title>
+    <script src="../bower_components/angular/angular.js"></script>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+<p>如果一个表单form只有一个input输入域，当该输入处于焦点时，按回车键就会触发表单提交行为(触发ngSubmit)</p>
+
+<form novalidate ng-submit="vm.submit()">
+    <label>
+        <input type="text" placeholder="input1" ng-model="vm.model"/>
+    </label>
+
+    <!-- 如果有两个input，不管哪个input处于焦点，都不会触发form的ngSubmit方法 -->
+    <!--<label>-->
+    <!--<input type="text" placeholder="input2"/>-->
+    <!--</label>-->
+</form>
+
+<p ng-bind="vm.submitTip"></p>
+
+<script>
+    angular.module('demo', []);
+
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController($timeout) {
+        var vm = this;
+        vm.model = '';
+        vm.submitTip = '';
+
+        vm.submit = function () {
+            vm.submitTip = 'you have submitted';
+            $timeout(function () {
+                vm.submitTip = '';
+            }, 1000)
+        };
+    }
+</script>
+</body>
+</html>

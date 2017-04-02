@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo-2</title>
+    <script src="../bower_components/angular/angular.js"></script>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+
+<form novalidate ng-submit="vm.submit()">
+    <label>
+        <input type="text" name="username" ng-model="vm.username" placeholder="username"/>
+    </label>
+    <label>
+        <input type="password" name="password" ng-model="vm.password" placeholder="password"/>
+    </label>
+    <!-- 将type类型为submit的button或者input放在form标签中，可以实现回车，点击提交 -->
+    <!--<button type="submit">提交</button>-->
+
+    <!-- 或者 -->
+    <input type="submit" value="提交"/>
+</form>
+
+<script>
+    angular.module('demo', []);
+
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController($window) {
+        var vm = this;
+
+        vm.submit = function () {
+            $window.alert('提交');
+        };
+
+    }
+</script>
+</body>
+</html>
