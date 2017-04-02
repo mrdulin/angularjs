@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "contactList.controller.js",
+  "sourceRoot": "",
+  "sources": [
+    "contactList.controller.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,MAAA;;EAAM;IACF,qBAAC,CAAA,OAAD,GAAW,CAAC,MAAD;;IAEE,+BAAC,IAAD;AACT,UAAA;MAAA,EAAA,GAAK;MACL,EAAE,CAAC,IAAH,GACI;QAAA,CAAA,EAAG,IAAH;QACA,CAAA,EAAG,MADH;QAEA,CAAA,EAAG,MAFH;QAGA,CAAA,EAAG,OAHH;;AAKJ;IARS;;;;;;EAUjB,OACA,CAAC,MADD,CACQ,KADR,CAEA,CAAC,UAFD,CAEY,uBAFZ,EAEqC,qBAFrC;AAbA"
+}
