@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <title>删除ngSrc</title>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap-theme.css"/>
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <script src="../bower_components/angular/angular.js"></script>
+    <style>
+        img{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+<div ng-controller="DemoController as demo">
+
+    <!--删除ng-src的model，ngSrc指令不会更新img的src-->
+    <img ng-src='{{demo.src}}' alt=""/>
+
+    <!--一种解决办法是使用ngIf指令-->
+    <img ng-if='demo.src' ng-src='{{demo.src}}' alt=""/>
+
+    <button type="button" ng-click="demo.handleAdd()">add</button>
+    <button type='button' ng-click='demo.handleDel()'>del</button>
+
+</div>
+
+
+<script>
+
+    angular.module('demo', []);
+
+    (function () {
+        angular
+                .module('demo')
+                .controller('DemoController', DemoController);
+
+        DemoController.$inject = ['$scope'];
+
+        function DemoController($scope) {
+
+            var vm = this;
+
+            vm.handleAdd = function() {
+                vm.src = 'http://7xp9vw.com1.z0.glb.clouddn.com/image/3.jpg';
+            };
+
+            vm.handleDel = function() {
+                vm.src = '';
+            };
+
+
+        }
+    })();
+
+</script>
+</body>
+</html>
+
+
