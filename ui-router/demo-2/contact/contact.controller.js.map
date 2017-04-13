@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "contact.controller.js",
+  "sourceRoot": "",
+  "sources": [
+    "contact.controller.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,MAAA;;EAAM;IACF,iBAAC,CAAA,OAAD,GAAW,CAAC,MAAD;;IAEE,2BAAC,IAAD;AACT,UAAA;MAAA,EAAA,GAAK;MACL,EAAE,CAAC,OAAH,GAAa;AAEb;IAJS;;;;;;EAMjB,OACA,CAAC,MADD,CACQ,KADR,CAEA,CAAC,UAFD,CAEY,mBAFZ,EAEiC,iBAFjC;AATA"
+}

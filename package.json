@@ -1,0 +1,27 @@
+{
+  "name": "learn-angular",
+  "version": "1.0.0",
+  "description": "`Unit testing` jasmine\r `E2E testing` protractor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "karma_start": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://novaline@qq.com:ez2dj_dl@github.com/mrdulin/learn-angular.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrdulin/learn-angular/issues"
+  },
+  "homepage": "https://github.com/mrdulin/learn-angular#readme",
+  "devDependencies": {
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-jasmine": "^0.3.8"
+  }
+}

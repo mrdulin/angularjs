@@ -27,6 +27,11 @@
     "angular-i18n": "~1.4.8",
     "angular-aria": "~1.4.8",
     "jquery": "^2.2.3",
-    "ng-file-upload": "~10.1.2"
+    "ng-file-upload": "~10.1.2",
+    "angular-ui-router": "^0.2.18"
+    "requirejs": "https://github.com/jrburke/requirejs.git#~2.1.22",
+    "angular": "~1.4.8",
+    "angular-route": "~1.4.8",
+    "text": "https://github.com/requirejs/text.git#~2.0.14"
   }
 }

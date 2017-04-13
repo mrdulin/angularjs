@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo-4</title>
+    <script src="../bower_components/angular/angular.js"></script>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+
+<form novalidate ng-submit="vm.submit()">
+    <fieldset ng-disabled="vm.isSubmitting">
+        <legend>登陆信息</legend>
+        <label>
+            <input type="text" name="username" ng-model="vm.username" placeholder="username"/>
+        </label>
+        <label>
+            <input type="password" name="password" ng-model="vm.password" placeholder="password"/>
+        </label>
+        <input type="submit" value="提交"/>
+    </fieldset>
+</form>
+
+<p ng-bind="vm.formTip"></p>
+
+<script>
+    angular.module('demo', []);
+
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController($timeout) {
+        var vm = this;
+        vm.isSubmitting = false;
+        vm.formTip = '表单启用';
+
+        vm.submit = function () {
+            vm.isSubmitting = true;
+            vm.formTip = '提交中...表单控件被禁用';
+            $timeout(function () {
+                vm.isSubmitting = false;
+                vm.formTip = '表单启用';
+            }, 3000);
+        };
+    }
+</script>
+</body>
+</html>

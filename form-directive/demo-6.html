@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo-6</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <style>
+        .form-group {
+            margin-bottom: 2px;
+        }
+
+        .form-message {
+            height: 20px;
+            font-size: 12px;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input.ng-invalid.ng-dirty {
+            border: 1px solid #B02B2C;
+        }
+
+        input.ng-valid.ng-dirty {
+            border: 1px solid #6BBA70;
+        }
+    </style>
+</head>
+<body ng-app="demo" ng-controller="DemoController as vm">
+
+<form name="loginForm" novalidate ng-submit="loginForm.$valid && vm.submit()">
+    <div class="form-group">
+        <label>
+            <input type="text" name="username" ng-model="vm.username" placeholder="username" required
+                   autocomplete="off"/>
+        </label>
+    </div>
+    <div class="form-message">
+        <div ng-show="loginForm.$submitted && loginForm.username.$touched">
+            <span ng-show="loginForm.username.$error.required">请输入用户名</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="password" name="password" ng-model="vm.password" placeholder="password" required
+                   autocomplete="off"/>
+        </label>
+    </div>
+    <div class="form-message">
+        <div ng-show="loginForm.$submitted && loginForm.password.$touched">
+            <span ng-show="loginForm.password.$error.required">请输入密码</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="提交"/>
+
+        <!-- 通过ngClick指定reset表单的方法 -->
+        <input type="button" value="重置" ng-click="vm.reset(loginForm)"/>
+    </div>
+</form>
+
+<p ng-bind="vm.username"></p>
+
+<p ng-bind="vm.password"></p>
+
+<script>
+    angular.module('demo', []);
+
+    angular
+            .module('demo')
+            .controller('DemoController', DemoController);
+
+    function DemoController($window) {
+        var vm = this;
+
+        vm.submit = function () {
+            $window.alert('提交');
+        };
+
+        vm.reset = function (form) {
+            vm.username = '';
+            vm.password = '';
+            if (form) {
+                form.$setPristine();
+                form.$setUntouched();
+            }
+        };
+
+        vm.reset();
+
+    }
+</script>
+</body>
+</html>
